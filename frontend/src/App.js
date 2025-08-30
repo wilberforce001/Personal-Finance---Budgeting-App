@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import Categories from "./pages/Categories";
+import Navbar from "./components/Navbar";
+import Transactions from "./pages/Transaction";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+      <Routes>
+        {/* Redirect root to "/" to login */}
+        <Route path="/" element={<Navigate to="/login" /> } />
+
+        {/* Auth pages */}
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+
+        {/* Protected pages */}
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/transactions" element={<Transactions />}/>
+      </Routes>
+    </Router>
   );
 }
 
