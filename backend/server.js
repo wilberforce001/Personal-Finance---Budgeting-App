@@ -28,7 +28,7 @@ const _filename = fileURLToPath(import.meta.url);
 const _dirname = path.dirname(_filename);
 
 if (process.env.NODE_ENV === "production") {
-    const frontendPath = ath.join(_dirname, "../frontend/build");
+    const frontendPath = path.join(_dirname, "../frontend/build");
     app.use(express.static(frontendPath));
 
     app.get("*", (req, res) => 
