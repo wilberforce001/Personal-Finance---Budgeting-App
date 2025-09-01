@@ -1,36 +1,29 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-// import Register from "./pages/Register";
-// import Login from "./pages/Login";
-// import Dashboard from "./pages/Dashboard";
-import Categories from "./pages/Categories";
-import Navbar from "./components/Navbar";
-import Transactions from "./pages/Transaction";
-import Sidebar from "./components/Sidebar";
 import Home from "./pages/Home";
+import Categories from "./pages/Categories";
+import Transactions from "./pages/Transaction";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import PrivateRoute from "./components/PrivateRoute";
+import Layout from "./components/Layout";
 
 function App() {
   return (
     <Router>
-      <div className="flex h-screen bg-orange-100">
-        {/* Sidebar */}
-        <Sidebar />
+      <Routes>
 
-        {/* Main Content Area */}
-        <div className="flex flex-col flex-1">
-          {/* Navbar */}
-          <Navbar />
+        {/* Public routes */}
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />}/>
 
-          {/* Page Content */}
-          <main className="p-4 overflow-y-auto">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/categories" element={<Categories />} />
-              <Route path="/transactions" element={<Transactions />} />
-            </Routes>
-          </main>
-        </div>
-      </div>
+        {/* Protected routes with Navbar inside */}
+        <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
+        <Route path="/dashboard" element={<PrivateRoute><Layout><Dashboard/></Layout></PrivateRoute>} />
+        <Route path="/categories" element={<PrivateRoute><Categories /></PrivateRoute>} />
+        <Route path="/transactions" element={<PrivateRoute><Transactions /></PrivateRoute>} />
+      </Routes>
     </Router>
   );
 }
