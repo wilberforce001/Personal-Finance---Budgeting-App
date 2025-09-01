@@ -6,6 +6,7 @@ import userRoutes from "./routes/userRoutes.js";
 import categoryRoutes from "./routes/categories.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import dashboardRoutes from "./routes/dashboard.js"
 
 dotenv.config();
 connectDB();
@@ -22,6 +23,7 @@ app.get("/api", (req, res) => {
 
 app.use("/api/categories", categoryRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 // -------------------------------------------------- //
 
 // ------------------- Serve Frontend ------------------- //
