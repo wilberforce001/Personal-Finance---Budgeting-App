@@ -28,8 +28,10 @@ app.use("/api/users", userRoutes);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// ✅ Always resolve relative to backend folder
+const frontendPath = path.join(__dirname, "../frontend/build");
+
 if (process.env.NODE_ENV === "production") {
-  const frontendPath = path.join(__dirname, "./frontend/build"); // ✅ points correctly when backend is at root
   app.use(express.static(frontendPath));
 
   app.get("*", (req, res) =>
