@@ -52,7 +52,7 @@ const Dashboard = () => {
         </div>
         <div className="bg-blue-100 shadow rounded-xl p-4">
           <p className="text-gray-500">Categories</p>
-          <p className="text-xl font-semibold">{summary.categoriesCount}</p>
+          <p className="text-xl font-semibold">{summary?.categoriesCount?? 0}</p>
         </div>
       </div>
 
