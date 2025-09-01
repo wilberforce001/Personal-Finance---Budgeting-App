@@ -15,6 +15,7 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         const { data } = await API.get("dashboard/summary");
+        console.log("Dashboard API response:", data);
         setSummary(data.summary);
         setTransactions(data.recentTransactions);
       } catch (error) {
