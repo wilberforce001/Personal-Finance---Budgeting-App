@@ -18,7 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 // Root API check
-app.get("/api", (req, res) => {
+app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
@@ -33,12 +33,11 @@ const __dirname = path.dirname(__filename);
 
 
 if (process.env.NODE_ENV === "production") {
-  const frontendPath = path.join(__dirname, "../frontend/build");
-  app.use(express.static(frontendPath));
+  app.use(express.static(path.join(__dirname, "/frontend/build")));
 
   // Any route not starting with /api should load frontend
   app.get("*", (req, res) =>
-    res.sendFile(path.resolve(frontendPath, "index.html"))
+    res.sendFile(path.join(__dirname, "frontend/build/index.html"))
   );
 }
 
