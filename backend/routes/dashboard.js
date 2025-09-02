@@ -5,7 +5,7 @@ import Category from "../models/Category.js";
 
 const router = express.Router();
 
-router.get("/summary", authMiddleware, async (requestAnimationFrame, res) => {
+router.get("/summary", authMiddleware, async (req, res) => {
     try {
         const userId = req.user.id;
 
