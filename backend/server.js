@@ -13,34 +13,35 @@ connectDB();
 
 const app = express();
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// ------------------- API Routes ------------------- //
+// Root API check
 app.get("/api", (req, res) => {
   res.send("API is running...");
 });
 
+// API routes
 app.use("/api/categories", categoryRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/dashboard", dashboardRoutes);
-// -------------------------------------------------- //
 
-// ------------------- Serve Frontend ------------------- //
+// Serve Frontend
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ✅ Always resolve relative to backend folder
-const frontendPath = path.join(__dirname, "../frontend/build");
 
 if (process.env.NODE_ENV === "production") {
+  const frontendPath = path.join(__dirname, "../frontend/build");
   app.use(express.static(frontendPath));
 
-  app.get("/*", (req, res) =>
+  // Any route not starting with /api should load frontend
+  app.get("*", (req, res) =>
     res.sendFile(path.resolve(frontendPath, "index.html"))
   );
 }
-// ------------------------------------------------------- //
 
+// Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
