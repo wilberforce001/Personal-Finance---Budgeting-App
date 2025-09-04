@@ -21,7 +21,7 @@ function App() {
         {/* Protected routes with Navbar inside */}
         <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
         <Route path="/dashboard" element={<PrivateRoute><Layout><Dashboard/></Layout></PrivateRoute>} />
-        <Route path="/categories" element={<PrivateRoute><Categories /></PrivateRoute>} />
+        <Route path="/categories" element={<PrivateRoute><Layout><Categories /></Layout></PrivateRoute>} />
         <Route path="/transactions" element={<PrivateRoute><Transactions /></PrivateRoute>} />
       </Routes>
     </Router>
