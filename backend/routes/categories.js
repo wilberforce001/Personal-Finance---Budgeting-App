@@ -4,7 +4,7 @@ import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// All category routes are protected
+// Protected routes
 router.post("/", authMiddleware, addCategory);
 router.get("/", authMiddleware, getCategories);
 router.delete("/:id", authMiddleware, deleteCategory);
